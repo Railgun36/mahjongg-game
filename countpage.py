@@ -130,11 +130,11 @@ class Points_screen(Mahjongg):
         )
         self.rounds_label.grid(column=1, row=10)
 
-    def new_page(self):
+    def new_page(self):  # Goes to new page to insert points
         self.points_frame.destroy()
         Points_screen().calculate
 
-    def activate_calculate(self):
+    def activate_calculate(self):  # Activates calculations button
         self.calc_button["state"] = "active"
 
     def calculate(self):
