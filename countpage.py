@@ -19,7 +19,7 @@ class Points_screen(Mahjongg):
             bg=app.BG_COLOR,
             fg="#a83232",
         )
-        self.title_label.grid(row=0, column=1)
+        self.title_label.grid(row=0, columnspan=2)
 
         self.player1_label = Label(
             self.points_frame,
