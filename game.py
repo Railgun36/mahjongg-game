@@ -52,7 +52,7 @@ class Mahjongg:
             return False
 
     def defended(self, defender_dict):
-        # ==Berechnung, wenn verteidigt wurde
+        # ==Berechnung, wenn Osten verteidigt wurde
         for player in self.players:
             if player == defender_dict:
                 player[list(player.keys())[0]]["score"] += (
@@ -75,7 +75,7 @@ class Mahjongg:
 
     def not_defended(self, winner_dict):
         print("No Defender")
-        # ==Berechnung, wenn nicht verteidigt wurde
+        # ==Berechnung, wenn nicht Osten verteidigt wurde
         for player in self.players:
             if player == winner_dict:
                 player[list(player.keys())[0]]["score"] += (
