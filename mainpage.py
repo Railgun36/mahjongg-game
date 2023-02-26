@@ -1,79 +1,131 @@
 from game import Mahjongg
 from tkinter import ttk, Label, Entry, IntVar, Button
 import app
+import yaml
+import flask
+from flask import request, json, jsonify, render_template
+from flask_mysqldb import MySQL
 
+db_app = flask.Flask(__name__)
+db = yaml.safe_load(open("db.yaml"))
+db_app.config["MYSQL_HOST"] = db["mysql_host"]
+db_app.config["MYSQL_USER"] = db["mysql_user"]
+db_app.config["MYSQL_PASSWORD"] = db["mysql_password"]
+db_app.config["MYSQL_DB"] = db["mysql_db"]
+mysql = MySQL(db_app)
 
+class MainWindow():
+
+    def __init__(self, master, title, size):
+        self.master = master
+        self.title = title
+        self.size = size
+        self.master.title(self.title)
+        self.master.geometry(self.size)
 mainpage_frame = ttk.Frame(app.root)
 mainpage_frame.pack()
-
 fontsize = 20
+radioValue = IntVar() 
 
-radioValue = IntVar()
-
-
-def start_game():
-    Mahjongg.players[0]["player1"]["name"] = field_player1.get()
-    Mahjongg.players[1]["player2"]["name"] = field_player2.get()
-    Mahjongg.players[2]["player3"]["name"] = field_player3.get()
-    Mahjongg.players[3]["player4"]["name"] = field_player4.get()
+def new_game():
     mainpage_frame.destroy()
-    from countpage import Points_screen
+    from new_game import start_new_game
+    start_new_game()
 
-    Points_screen()
+def main_screen():    
+    background_label = Label(mainpage_frame, bg=app.BG_COLOR)
+    background_label.place(relheight=1, relwidth=1)
+
+    title_label = Label(
+        mainpage_frame,
+        text="Mahjongg",
+        font=("Segoe Script", 35),
+        bg=app.BG_COLOR,
+        fg="#a83232",
+    )
+    title_label.grid()
+
+    names_label = Label(
+        mainpage_frame, 
+        text="Please select..", 
+        font=("Cambria italic", 30), 
+        bg=app.BG_COLOR
+    )
+    names_label.grid()
+
+    new_button = Button(
+        mainpage_frame, 
+        text="New Game", 
+        font=("Arial bold", 10), 
+        command=new_game
+    )
+    new_button.grid()
+
+    load_button = Button(
+        mainpage_frame, 
+        text="Load Game", 
+        font=("Arial bold", 10), 
+        command=new_game
+    )
+    load_button.grid()
 
 
-background_label = Label(mainpage_frame, bg=app.BG_COLOR)
-background_label.place(relheight=1, relwidth=1)
+    empty_label = Label(
+        mainpage_frame, 
+        text="  ", 
+        bg=app.BG_COLOR
+    )
+    empty_label.grid()
 
-title_label = Label(
-    mainpage_frame,
-    text="Mahjongg",
-    font=("Segoe Script", 35),
-    bg=app.BG_COLOR,
-    fg="#a83232",
-)
-title_label.grid()
 
-names_label = Label(
-    mainpage_frame, text="Insert Names", font=("Cambria italic", 30), bg=app.BG_COLOR
-)
-names_label.grid()
 
-field_player1 = Entry(
-    mainpage_frame,
-    font=fontsize,
-    justify="center",
-    borderwidth=4,
-    relief="groove",
-    highlightbackground=app.BG_COLOR,
-)
-field_player1.insert(0, "Player 1 (EAST)")
-field_player1.grid()
+    app.root.mainloop()
 
-field_player2 = Entry(
-    mainpage_frame, font=fontsize, justify="center", borderwidth=4, relief="groove"
-)
-field_player2.insert(0, "Player 2 (SOUTH)")
-field_player2.grid()
+def main_screen2():   
+    background_label = Label(mainpage_frame, bg=app.BG_COLOR)
+    background_label.place(relheight=1, relwidth=1)
 
-field_player3 = Entry(
-    mainpage_frame, font=fontsize, justify="center", borderwidth=4, relief="groove"
-)
-field_player3.insert(0, "Player 3 (WEST)")
-field_player3.grid()
+    title_label = Label(
+        mainpage_frame,
+        text="Mahjongg",
+        font=("Segoe Script", 35),
+        bg=app.BG_COLOR,
+        fg="#a83232",
+    )
+    title_label.grid()
 
-field_player4 = Entry(
-    mainpage_frame, font=20, justify="center", borderwidth=4, relief="groove"
-)
-field_player4.insert(0, "Player 4 (NORD)")
-field_player4.grid()
+    names_label = Label(
+        mainpage_frame, 
+        text="Please select..", 
+        font=("Cambria italic", 30), 
+        bg=app.BG_COLOR
+    )
+    names_label.grid()
 
-empty_label = Label(mainpage_frame, text="  ", bg=app.BG_COLOR)
-empty_label.grid()
+    new_button = Button(
+        mainpage_frame, 
+        text="New Game", 
+        font=("Arial bold", 10), 
+        command=new_game
+    )
+    new_button.grid()
 
-start_button = Button(
-    mainpage_frame, text="Play Mahjongg", font=("Arial bold", 10), command=start_game
-)
-start_button.grid()
+    load_button = Button(
+        mainpage_frame, 
+        text="Load Game", 
+        font=("Arial bold", 10), 
+        command=new_game
+    )
+    load_button.grid()
 
-app.root.mainloop()
+    empty_label = Label(
+        mainpage_frame, 
+        text="  ", 
+        bg=app.BG_COLOR
+    )
+    empty_label.grid()
+
+    app.root.mainloop()
+
+
+main_screen2()
