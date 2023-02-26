@@ -3,9 +3,9 @@ class Mahjongg:
         {"player1": {"name": "", "score": 0, "direction": "EAST", "roundpoints": 0}},
         {"player2": {"name": "", "score": 0, "direction": "SOUTH", "roundpoints": 0}},
         {"player3": {"name": "", "score": 0, "direction": "WEST", "roundpoints": 0}},
-        {"player4": {"name": "", "score": 0, "direction": "NORD", "roundpoints": 0}},
+        {"player4": {"name": "", "score": 0, "direction": "NORTH", "roundpoints": 0}},
     ]
-    directions = ["NORD", "WEST", "SOUTH", "EAST"]
+    directions = ["NORTH", "WEST", "SOUTH", "EAST"]
 
     def __init__(self):
         pass
