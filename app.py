@@ -1,9 +1,6 @@
 import mainpage
 import tkinter as tk
 
-#configure db
-
-
 
 HEIGHT = 350
 WIDTH = 350
